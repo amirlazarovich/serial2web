@@ -136,6 +136,7 @@ void readSerial() {
     buffer[positionInBuffer] = (char) Serial.read();
     if (buffer[positionInBuffer] == '\n') {
       // done reading
+      buffer[++positionInBuffer] = '\0';
       positionInBuffer = 0;
       onSerialRead(buffer);
     } else {

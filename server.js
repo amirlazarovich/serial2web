@@ -14,6 +14,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var spawn = require('child_process').spawn
 
 // variables
 var port = glob.GlobSync("/dev/tty.usbserial*").found[0];
@@ -55,6 +56,9 @@ function main() {
 	setupSerial();
 	setupWeb();
 	setupSocket();
+
+	// open website
+	spawn('open', ['http://localhost:' + webPort]);
 }
 
 function setupSerial() {
@@ -68,7 +72,7 @@ function setupSerial() {
 
 	  serial.on("data", function(data) {
 	  	io.emit("data", data);
-	    console.log("data received: " + data);
+	    console.log("> from board: " + data);
 	  });
 	});
 
@@ -82,14 +86,14 @@ function setupWeb() {
 	app.use("/", express.static(__dirname + "/static"));
 	
 	http.listen(webPort, function () {
-	    console.log("go to http://127.0.0.1:" + webPort);
+	    console.log("++ go to http://localhost:" + webPort);
 	});
 }
 
 function setupSocket() {
 	io.on('connection', function(socket) {
 		socket.on("led", function(id) {
-			console.log("set led at pin: " + id);
+			console.log("> from web: " + id);
 			writeToSerial(id);
 		});
 	});
