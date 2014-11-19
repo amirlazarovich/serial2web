@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Serial - Web</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <link rel="stylesheet" href="/static/index.css" />
+    <script type="text/javascript">
+        $(function() {
+            var socket = io();
+            var label = $('#text');
+            socket.on("data", function(msg) {
+                label.text(msg);
+            });
+
+            $('#led1').click(function() {
+                socket.emit("led", 2);
+            });
+
+            $('#led2').click(function() {
+                socket.emit("led", 13);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <section>
+        <button id="led1">LED 1</button>
+        <button id="led2">LED 2</button>
+    </section>
+    
+    <section>
+        <label>Arduino: <span id="text"></span></label>
+    <section>
+</body>
+
+</html>
