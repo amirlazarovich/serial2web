@@ -20,7 +20,7 @@ options:
 
 ### Example
 ```javascript 
-node server -b 57600 -w 8008
+node server
 ```
 
 ###### Note
