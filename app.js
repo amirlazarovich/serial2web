@@ -4,6 +4,7 @@
  * Thanks to Tomer Weller! (https://github.com/tomerweller/serial-to-socketio)
  *
  * @author  Amir Lazarovich
+ * @date    2014, Nov 19
  */
 
 
@@ -26,29 +27,7 @@ var serial;
 
 
 function main() {
-	parseArguments(function(key, value) {
-		switch (key) {
-			case "p":
-			case "port":
-				port = value;
-				break;
-
-			case "b":
-			case "baudrate":
-				baudrate = value;
-				break;
-
-			case "w":
-			case "webport":
-				webport = value;
-				break;
-
-			case "h":
-			case "help":
-				printUsage();
-				break;
-		}
-	});
+	setArguments();
 
 	assertSerialConnection();
 	printSettings();
@@ -128,6 +107,35 @@ function printUsage() {
 }
 
 /**
+ * parse script arguments and set local variables
+ */
+function setArguments() {
+	parseArguments(function(key, value) {
+		switch (key) {
+			case "p":
+			case "port":
+				port = value;
+				break;
+
+			case "b":
+			case "baudrate":
+				baudrate = value;
+				break;
+
+			case "w":
+			case "webport":
+				webport = value;
+				break;
+
+			case "h":
+			case "help":
+				printUsage();
+				break;
+		}
+	});
+}
+
+/**
  * parse arguments for better handling
  * 
  * @param  {Function} callback (key, value)
@@ -147,9 +155,14 @@ function parseArguments(callback) {
 	}
 }
 
+/**
+ * make sure serial connected
+ *  
+ * @param  {boolean} exit throw error and exit
+ */
 function assertSerialConnection(exit) {
 	if (port === undefined || exit) {
-		console.log("[error] board not connected - please check serial connection");
+		console.log("[error] board not connected - please check serial connection or serial port");
 		process.exit(-1);
 	}	
 }
