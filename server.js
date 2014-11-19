@@ -19,7 +19,7 @@ var spawn = require('child_process').spawn
 // variables
 var port = glob.GlobSync("/dev/tty.usbserial*").found[0];
 var baudrate = 9600;
-var webPort = 8000;
+var webport = 8000;
 var serial;
 
 
@@ -40,7 +40,7 @@ function main() {
 
 			case "w":
 			case "webport":
-				webPort = value;
+				webport = value;
 				break;
 
 			case "h":
@@ -58,7 +58,7 @@ function main() {
 	setupSocket();
 
 	// open website
-	spawn('open', ['http://localhost:' + webPort]);
+	spawn('open', ['http://localhost:' + webport]);
 }
 
 function setupSerial() {
@@ -85,8 +85,8 @@ function setupWeb() {
 	app.use("/static", express.static(__dirname + "/static"));
 	app.use("/", express.static(__dirname + "/static"));
 	
-	http.listen(webPort, function () {
-	    console.log("++ go to http://localhost:" + webPort);
+	http.listen(webport, function () {
+	    console.log("++ go to http://localhost:" + webport);
 	});
 }
 
@@ -111,7 +111,7 @@ function printSettings() {
 	console.log("Using:");
 	console.log("+ serial port: " + port);
 	console.log("+ baudrate: " + baudrate);
-	console.log("+ web port: " + webPort);
+	console.log("+ web port: " + webport);
 }
 
 function printUsage() {

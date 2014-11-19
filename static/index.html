@@ -14,12 +14,8 @@
                 label.text(msg);
             });
 
-            $('#led1').click(function() {
-                socket.emit("led", 2);
-            });
-
-            $('#led2').click(function() {
-                socket.emit("led", 13);
+            $('button').click(function() {
+                socket.emit("led", this.value);
             });
         });
     </script>
@@ -27,8 +23,8 @@
 
 <body>
     <section>
-        <button id="led1">LED 1</button>
-        <button id="led2">LED 2</button>
+        <button value="2">LED 1</button>
+        <button value="13">LED 2</button>
     </section>
     
     <section>
