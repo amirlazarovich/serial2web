@@ -16,47 +16,46 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 // variables
-var DEFAULT_SERIAL_PORT = "/dev/tty.usbserial*";
-var port = glob.GlobSync(DEFAULT_SERIAL_PORT).found[0];
+var port = glob.GlobSync("/dev/tty.usbserial*").found[0];
 var baudrate = 9600;
 var webPort = 8000;
 var serial;
 
 
-parseArguments(function(key, value) {
-	switch (key) {
-		case "p":
-		case "port":
-			port = value;
-			break;
-
-		case "b":
-		case "baudrate":
-			baudrate = value;
-			break;
-
-		case "w":
-		case "webport":
-			webPort = value;
-			break;
-
-		case "h":
-		case "help":
-			printUsage();
-			break;
-	}
-});
-
-assertSerialConnection();
-printSettings();
-
-setupSerial();
-setupWeb();
-setupSocket();
 
 
+function main() {
+	parseArguments(function(key, value) {
+		switch (key) {
+			case "p":
+			case "port":
+				port = value;
+				break;
 
+			case "b":
+			case "baudrate":
+				baudrate = value;
+				break;
 
+			case "w":
+			case "webport":
+				webPort = value;
+				break;
+
+			case "h":
+			case "help":
+				printUsage();
+				break;
+		}
+	});
+
+	assertSerialConnection();
+	printSettings();
+
+	setupSerial();
+	setupWeb();
+	setupSocket();
+}
 
 function setupSerial() {
 	serial = new serialport.SerialPort(port, {
@@ -150,3 +149,6 @@ function assertSerialConnection(exit) {
 		process.exit(-1);
 	}	
 }
+
+// run
+main();
