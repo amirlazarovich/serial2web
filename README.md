@@ -24,5 +24,5 @@ node server
 ```
 
 ###### Note
-For some reason the node-serialport library didn't send the first character correctly to the board. I might overseen something - see if you can find my bug :)
+For some reason the arduino serial library doesn't read a single character correctly. I might have overseen something - see if you can find my bug :)
 As a temporary workaround, I'm prepending a "0" and ignoring it while reading the value from the serial on the board. 
