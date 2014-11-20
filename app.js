@@ -104,7 +104,7 @@ function printUsage() {
 	console.log("-p, --port			set serial port [default: tty.usbserial*]");
 	console.log("-b, --baudrate			set baudrate [default: 9600]");
 	console.log("-w, --webport			set web port [default: 8000]");
-	console.log("-no-prepend		disable character prepending");
+	console.log("-no-prepend			disable character prepending");
 	process.exit(0);
 }
 
