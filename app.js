@@ -51,8 +51,8 @@ function setupSerial() {
 	  console.log("+ serial port: open");
 
 	  serial.on("data", function(data) {
-	  	io.emit("data", data);
-	    console.log("> from board: " + data);
+	  	io.emit("data", "ack: " + data);
+	    console.log("< from board: " + data);
 	  });
 	});
 
