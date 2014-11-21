@@ -18,7 +18,6 @@ options:
 -p, --port			 set serial port [default: tty.usb*]
 -b, --baudrate		 set baudrate [default: 9600]
 -w, --webport		 set web port [default: 8000]
--no-prepend			 disable character prepending
 ```
 
 ### Example
