@@ -127,12 +127,6 @@ void handleButton(int btn) {
 
 void readSerial() {
   if (Serial.available() > 0) {
-    if (positionInBuffer == 0) {
-      // workaround: ignore first char
-      Serial.read(); 
-      while (Serial.available() <= 0);
-    }
-    
     buffer[positionInBuffer] = (char) Serial.read();
     if (buffer[positionInBuffer] == '\n') {
       // done reading

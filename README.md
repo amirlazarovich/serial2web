@@ -25,7 +25,3 @@ options:
 ```javascript 
 node app
 ```
-
-###### Note
-For some reason the arduino serial library doesn't read a single character correctly. I might have overseen something - see if you can find my bug :)
-As a temporary workaround, I'm prepending a "0" and ignoring it while reading the value from the serial on the board. If this doesn't happen to you, use the -no-prepend argument. 

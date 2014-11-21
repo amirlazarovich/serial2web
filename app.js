@@ -21,7 +21,6 @@ var spawn = require('child_process').spawn
 var port = glob.GlobSync("/dev/tty.usb*").found[0];
 var baudrate = 9600;
 var webport = 8000;
-var prependCharacter = true;
 var serial;
 
 
@@ -84,7 +83,7 @@ function setupSocket() {
  * @param  value 
  */
 function writeToSerial(value) {
-	serial.write((prependCharacter ? "0" : "") + value + "\n");
+	serial.write(value + "\n");
 }
 
 function printSettings() {
@@ -104,7 +103,6 @@ function printUsage() {
 	console.log("-p, --port			set serial port [default: tty.usbserial*]");
 	console.log("-b, --baudrate			set baudrate [default: 9600]");
 	console.log("-w, --webport			set web port [default: 8000]");
-	console.log("-no-prepend			disable character prepending");
 	process.exit(0);
 }
 
@@ -127,10 +125,6 @@ function setupArguments() {
 			case "w":
 			case "webport":
 				webport = value;
-				break;
-
-			case "no-prepend":
-				prependCharacter = false;
 				break;
 
 			case "h":
